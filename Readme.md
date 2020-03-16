@@ -4,9 +4,9 @@ hbase setup in local environment:
 Download the hbase tar from hbase site as below 
 Example: hbase-2.0.2-bin.tar.gz 
 
-1.In hbase-cmd.config (C:\Hadoop\hadoop_binary\hbase-2.0.2\bin\), set java_home as below  set JAVA_HOME="C:\Program Files (x86)\Java\jre1.8.0_231"
+1.In hbase-cmd.config (C:\Hadoop\hadoop_binary\hbase\bin\), set java_home as below  set JAVA_HOME="C:\Program Files (x86)\Java\jre1.8"
 
-2.In hbase-site.xml (C:\Hadoop\hadoop_binary\hbase-2.0.2\conf\), set the below properties in configuration.
+2.In hbase-site.xml (C:\Hadoop\hadoop_binary\hbase\conf\), set the below properties in configuration.
 <configuration>
 	<property>
 		<name>hbase.rootdir</name>
@@ -23,16 +23,16 @@ Example: hbase-2.0.2-bin.tar.gz
 </configuration>
 
 3.Now, start habse service using below command
-C:\Hadoop\hadoop_binary\hbase-2.0.2\bin\start-hbase.cmd
+C:\Hadoop\hadoop_binary\hbase\bin\start-hbase.cmd
 
 (If any errors, verify them and resolve)
 Note: Make sure you place all files in 'C' drive else will get permission related issues like region server start 
 
 4. Once hbase -service up and running run hbase shell commnads to verify as below,
   > hbase shell
-  > create 'ob_auditing',cf'
-  > put 'ob_auditing','emp01','cf:fn','First Name'  
-  > scan 'ob_auditing'
+  > create 'table1',cf1'
+  > put 'table1','emp01','cf:fn','First Name'  
+  > scan 'table1'
 
 
 
@@ -53,10 +53,10 @@ Note: Remove the ' $PHOENIX_OPTS ' from both files sqlline.py & sqlline-thin.py
 
 verify whether phoenix working as expected by running few commands: 
 - !tables
-- CREATE TABLE IF NOT EXISTS ob_reporting (
-    EventTime TIME, APIName VARCHAR, APITokenID INTEGER, CorelationID INTEGER, Status VARCHAR
-    CONSTRAINT pk PRIMARY KEY (EventTime) )
-- UPSERT INTO ob_reporting VALUES ('2019-06-23 00:00:00','Get Customer',1111,1111,'202');
+- CREATE TABLE IF NOT EXISTS table1 (
+    time1 TIME, name1 VARCHAR, id1 INTEGER, id2 INTEGER, Status VARCHAR
+    CONSTRAINT pk PRIMARY KEY (time1) )
+- UPSERT INTO ob_reporting VALUES ('2019-06-23 00:00:00','Customer',1111,1111,'202');
 - select * from ob_reporting;	
 
 2.start query server using below command to connect via program using JDBC server
